@@ -5,7 +5,21 @@
 
 (define/match (my-fact x)
   [(0) 1]
-  [(x) (* x (my-fact (- x 1)))])
+  [(_) (* x (my-fact (- x 1)))])
+
+(define/match (fabo x)
+  [(0) 1]
+  [(1) 1]
+  [(_) (+ (fabo (- x 1))
+          (fabo (- x 2)))])
+
+(define my-square (λ (x) (* x x)))
+(define my-fabo
+  (λ (x)
+    (cond [(= x 0) 1]
+          [(= x 1) 1]
+          [else (+ (fabo (- x 1))
+                   (fabo (- x 2)))])))
 
 (define (R0-lang? sexp)
   (define (expression? exp)
